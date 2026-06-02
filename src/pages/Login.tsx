@@ -77,7 +77,7 @@ export default function Login() {
               Welcome to the<br />Parent Portal
             </h2>
             <p className="text-white/80 text-lg leading-relaxed">
-              Access your child's progress reports, upcoming events, attendance records, and communicate with their teachers — all in one place.
+              Access your child's progress reports, upcoming events, attendance records, and communicate with their teachers, all in one place.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
