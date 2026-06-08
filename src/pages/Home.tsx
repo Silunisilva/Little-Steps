@@ -41,7 +41,7 @@ const programs = [
     badgeColor: 'bg-amber-50 text-amber-600',
   },
   {
-    title: 'Pre-K Adventurers',
+    title: 'Pre K Adventurers',
     ageRange: '3 - 4 years',
     description: 'Structured learning with phonics, numeracy, science explorations, and social-emotional growth.',
     image: 'https://images.pexels.com/photos/8613312/pexels-photo-8613312.jpeg?auto=compress&cs=tinysrgb&w=600',
@@ -85,7 +85,7 @@ const testimonials = [
 ];
 
 const features = [
-  'Low child-to-teacher ratios (1:5)',
+  'Low child to teacher ratios (1:5)',
   'NAEYC accredited curriculum',
   'Daily healthy, chef-prepared meals',
   'Safe, stimulating learning environments',
