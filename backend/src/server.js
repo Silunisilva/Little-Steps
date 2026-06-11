@@ -16,7 +16,7 @@ const startServer = async () => {
     app.listen(PORT, () => {
       console.log(`\n🚀 Server is running on http://localhost:${PORT}`);
       console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log('✅ All systems operational\n');
+      console.log('✅ All systems are operational\n');
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
