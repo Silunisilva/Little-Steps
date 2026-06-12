@@ -4,36 +4,36 @@ const mongoose = require('mongoose');
 const StudentSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, 'Please provide student first name'],
+    required: [true, 'Please provide your first name'],
     trim: true,
   },
   lastName: {
     type: String,
-    required: [true, 'Please provide student last name'],
+    required: [true, 'Please provide your last name'],
     trim: true,
   },
   dateOfBirth: {
     type: Date,
-    required: [true, 'Please provide date of birth'],
+    required: [true, 'Please provide your date of birth'],
   },
   gender: {
     type: String,
     enum: ['male', 'female', 'other'],
-    required: [true, 'Please specify gender'],
+    required: [true, 'Please specify your gender'],
   },
   parentName: {
     type: String,
-    required: [true, 'Please provide parent name'],
+    required: [true, 'Please provide your parent name'],
     trim: true,
   },
   parentEmail: {
     type: String,
-    required: [true, 'Please provide parent email'],
+    required: [true, 'Please provide your parent email'],
     lowercase: true,
   },
   parentPhone: {
     type: String,
-    required: [true, 'Please provide parent phone'],
+    required: [true, 'Please provide your parent phone'],
     trim: true,
   },
   address: {

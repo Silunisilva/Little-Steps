@@ -4,22 +4,22 @@ const mongoose = require('mongoose');
 const AdmissionSchema = new mongoose.Schema({
   childFirstName: {
     type: String,
-    required: [true, 'Please provide child first name'],
+    required: [true, 'Please provide your child first name'],
     trim: true,
   },
   childLastName: {
     type: String,
-    required: [true, 'Please provide child last name'],
+    required: [true, 'Please provide your child last name'],
     trim: true,
   },
   dateOfBirth: {
     type: Date,
-    required: [true, 'Please provide date of birth'],
+    required: [true, 'Please provide your child\'s date of birth'],
   },
   gender: {
     type: String,
     enum: ['male', 'female', 'other'],
-    required: [true, 'Please specify gender'],
+    required: [true, 'Please specify your child\'s gender'],
   },
   program: {
     type: String,
@@ -28,17 +28,17 @@ const AdmissionSchema = new mongoose.Schema({
   },
   parentFirstName: {
     type: String,
-    required: [true, 'Please provide parent first name'],
+    required: [true, 'Please provide your parent first name'],
     trim: true,
   },
   parentLastName: {
     type: String,
-    required: [true, 'Please provide parent last name'],
+    required: [true, 'Please provide your parent last name'],
     trim: true,
   },
   parentEmail: {
     type: String,
-    required: [true, 'Please provide parent email'],
+    required: [true, 'Please provide your parent email'],
     lowercase: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -47,7 +47,7 @@ const AdmissionSchema = new mongoose.Schema({
   },
   parentPhone: {
     type: String,
-    required: [true, 'Please provide parent phone'],
+    required: [true, 'Please provide your parent phone'],
     trim: true,
   },
   address: {

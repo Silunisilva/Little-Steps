@@ -4,23 +4,23 @@ const mongoose = require('mongoose');
 const TeacherSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, 'Please provide teacher first name'],
+    required: [true, 'Please provide your first name'],
     trim: true,
   },
   lastName: {
     type: String,
-    required: [true, 'Please provide teacher last name'],
+    required: [true, 'Please provide your last name'],
     trim: true,
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
+    required: [true, 'Please provide your email'],
     unique: true,
     lowercase: true,
   },
   phone: {
     type: String,
-    required: [true, 'Please provide phone number'],
+    required: [true, 'Please provide your phone number'],
     trim: true,
   },
   specialization: {

@@ -4,17 +4,17 @@ const mongoose = require('mongoose');
 const ContactSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: [true, 'Please provide first name'],
+    required: [true, 'Please provide your first name'],
     trim: true,
   },
   lastName: {
     type: String,
-    required: [true, 'Please provide last name'],
+    required: [true, 'Please provide your last name'],
     trim: true,
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
+    required: [true, 'Please provide your email'],
     lowercase: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -23,17 +23,17 @@ const ContactSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: [true, 'Please provide phone number'],
+    required: [true, 'Please provide your phone number'],
     trim: true,
   },
   subject: {
     type: String,
-    required: [true, 'Please provide subject'],
+    required: [true, 'Please provide your subject'],
     trim: true,
   },
   message: {
     type: String,
-    required: [true, 'Please provide message'],
+    required: [true, 'Please provide your message'],
     trim: true,
   },
   type: {
