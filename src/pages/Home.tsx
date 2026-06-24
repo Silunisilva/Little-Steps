@@ -111,7 +111,7 @@ export default function Home() {
             <div className="space-y-8 animate-slide-up">
               <div className="inline-flex items-center gap-2 bg-primary-50 dark:bg-primary-900/30 border border-primary-100 dark:border-primary-800 rounded-full px-4 py-2">
                 <span className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse"></span>
-                <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">Now Enrolling for 2025–2026</span>
+                <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">Now Enrolling for 2025 – 2026</span>
               </div>
 
               <div>
