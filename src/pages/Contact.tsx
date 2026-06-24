@@ -80,7 +80,7 @@ export default function Contact() {
             <span className="text-sm font-semibold text-accent-600 dark:text-accent-400">Get In Touch</span>
           </div>
           <h1 className="section-title dark:text-white mb-6">
-            We'd Love to{' '}
+            We had Love to{' '}
             <span className="text-gradient">Hear From You</span>
           </h1>
           <p className="section-subtitle dark:text-gray-400 mx-auto">
