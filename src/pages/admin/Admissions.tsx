@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ClipboardList, Search, CheckCircle, XCircle, Clock, Eye, X } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface Admission {
   id: string;
@@ -38,9 +38,13 @@ export default function Admissions() {
   useEffect(() => {
     const fetchAdmissions = async () => {
       try {
-        const { data, error } = await supabase.from('admissions').select('*').order('created_at', { ascending: false });
-        if (error) throw error;
-        setAdmissions(data?.length ? data : mockAdmissions);
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${API_URL}/admissions`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.message);
+        setAdmissions(json.data?.length ? json.data : mockAdmissions);
       } catch {
         setAdmissions(mockAdmissions);
       } finally {

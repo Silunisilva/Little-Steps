@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Plus, Search, Edit2, Trash2, ChevronDown, Users, X } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface Student {
   id: string;
@@ -46,9 +46,13 @@ export default function Students() {
 
   const fetchStudents = async () => {
     try {
-      const { data, error } = await supabase.from('students').select('*').order('name');
-      if (error) throw error;
-      setStudents(data?.length ? data : mockStudents);
+      const token = localStorage.getItem('token');
+      const res = await fetch(`${API_URL}/students`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message);
+      setStudents(json.data?.length ? json.data : mockStudents);
     } catch {
       setStudents(mockStudents);
     } finally {

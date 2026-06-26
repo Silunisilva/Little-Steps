@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MessageSquare, Mail, Phone, Clock, ChevronRight, X, Reply } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface ContactMessage {
   id: string;
@@ -28,9 +28,22 @@ export default function Messages() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const { data, error } = await supabase.from('contacts').select('*').order('created_at', { ascending: false });
-        if (error) throw error;
-        setMessages(data?.length ? data : mockMessages);
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${API_URL}/contact`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.message);
+        
+        // Map backend schema (firstName, lastName) to frontend schema (name)
+        const messages = json.data?.map((msg: any) => ({
+          ...msg,
+          name: `${msg.firstName} ${msg.lastName}`,
+          created_at: msg.submittedAt || msg.created_at,
+          child_age: null
+        }));
+        
+        setMessages(messages?.length ? messages : mockMessages);
       } catch {
         setMessages(mockMessages);
       } finally {

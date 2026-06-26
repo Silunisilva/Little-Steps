@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, MessageSquare } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface FormData {
   name: string;
@@ -51,16 +51,31 @@ export default function Contact() {
     setError('');
 
     try {
-      const { error: dbError } = await supabase.from('contacts').insert([{
-        name: form.name,
-        email: form.email,
-        phone: form.phone || null,
-        subject: form.subject,
-        message: form.message,
-        child_age: form.childAge || null,
-      }]);
+      const parts = form.name.split(' ');
+      const firstName = parts[0];
+      const lastName = parts.slice(1).join(' ') || ' ';
+      
+      const payloadMessage = form.childAge 
+        ? `${form.message}\n\nChild's Age: ${form.childAge}` 
+        : form.message;
 
-      if (dbError) throw dbError;
+      const res = await fetch(`${API_URL}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: form.email,
+          phone: form.phone || 'N/A',
+          subject: form.subject,
+          message: payloadMessage,
+          type: 'general'
+        })
+      });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.message || 'Error submitting contact form');
+      
       setSuccess(true);
       setForm({ name: '', email: '', phone: '', subject: 'General Inquiry', message: '', childAge: '' });
     } catch {

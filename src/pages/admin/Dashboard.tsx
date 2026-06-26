@@ -5,8 +5,8 @@ import {
   TrendingUp, ArrowRight, Activity, CheckCircle,
   AlertCircle, Clock,
 } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 interface Stats {
   students: number;
@@ -38,17 +38,20 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [students, teachers, events, admissions] = await Promise.all([
-          supabase.from('students').select('id', { count: 'exact', head: true }),
-          supabase.from('teachers').select('id', { count: 'exact', head: true }),
-          supabase.from('events').select('id', { count: 'exact', head: true }),
-          supabase.from('admissions').select('id', { count: 'exact', head: true }),
+        const token = localStorage.getItem('token');
+        const headers = { Authorization: `Bearer ${token}` };
+        
+        const [students, teachers, admissions] = await Promise.all([
+          fetch(`${API_URL}/students`, { headers }).then(res => res.json()).catch(() => ({ data: [] })),
+          fetch(`${API_URL}/teachers`, { headers }).then(res => res.json()).catch(() => ({ data: [] })),
+          fetch(`${API_URL}/admissions`, { headers }).then(res => res.json()).catch(() => ({ data: [] })),
         ]);
+        
         setStats({
-          students: students.count || 0,
-          teachers: teachers.count || 0,
-          events: events.count || 0,
-          admissions: admissions.count || 0,
+          students: students.data?.length || 0,
+          teachers: teachers.data?.length || 0,
+          events: 0,
+          admissions: admissions.data?.length || 0,
         });
       } catch {
         // Stats will show 0 if tables don't exist yet
